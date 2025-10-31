@@ -8,6 +8,7 @@ import Dashboard from "./pages/Dashboard";
 import Timer from "./pages/Timer";
 import Planner from "./pages/Planner";
 import Progress from "./pages/Progress";
+import DSATracker from "./pages/DSATracker";
 import Wellness from "./pages/Wellness";
 import NotFound from "./pages/NotFound";
 
@@ -25,6 +26,7 @@ const App = () => (
             <Route path="/timer" element={<Timer />} />
             <Route path="/planner" element={<Planner />} />
             <Route path="/progress" element={<Progress />} />
+            <Route path="/dsa" element={<DSATracker />} />
             <Route path="/wellness" element={<Wellness />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

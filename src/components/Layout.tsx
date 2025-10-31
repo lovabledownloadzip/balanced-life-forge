@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, Timer, Calendar, TrendingUp, Eye } from 'lucide-react';
+import { Home, Timer, Calendar, TrendingUp, Eye, Code2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 interface LayoutProps {
@@ -15,6 +15,7 @@ const Layout = ({ children }: LayoutProps) => {
     { path: '/timer', icon: Timer, label: 'Timer' },
     { path: '/planner', icon: Calendar, label: 'Planner' },
     { path: '/progress', icon: TrendingUp, label: 'Progress' },
+    { path: '/dsa', icon: Code2, label: 'DSA' },
     { path: '/wellness', icon: Eye, label: 'Wellness' },
   ];
 
