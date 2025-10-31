@@ -1,19 +1,68 @@
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Play, Book, Briefcase, Dumbbell, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import ProgressRing from '@/components/ProgressRing';
 import FocusCard from '@/components/FocusCard';
 import { useNavigate } from 'react-router-dom';
 
+interface FocusTask {
+  icon: any;
+  title: string;
+  duration: string;
+  completed: boolean;
+  color: string;
+}
+
 const Dashboard = () => {
   const navigate = useNavigate();
   
-  const todaysFocus = [
-    { icon: Book, title: 'Study Session', duration: '2 hours', completed: true, color: 'hsl(var(--primary))' },
-    { icon: Briefcase, title: 'Project Work', duration: '1.5 hours', completed: true, color: 'hsl(var(--secondary))' },
+  const [focusTime, setFocusTime] = useState<string>('25');
+  const [todaysFocus, setTodaysFocus] = useState<FocusTask[]>([
+    { icon: Book, title: 'Study Session', duration: '2 hours', completed: false, color: 'hsl(var(--primary))' },
+    { icon: Briefcase, title: 'Project Work', duration: '1.5 hours', completed: false, color: 'hsl(var(--secondary))' },
     { icon: Dumbbell, title: 'Football Practice', duration: '1 hour', completed: false, color: 'hsl(var(--accent))' },
     { icon: Heart, title: 'Personal Time', duration: '30 mins', completed: false, color: 'hsl(180 60% 55%)' },
-  ];
+  ]);
+
+  useEffect(() => {
+    const savedTasks = localStorage.getItem('todaysFocus');
+    const savedFocusTime = localStorage.getItem('focusTime');
+    
+    if (savedTasks) {
+      const parsed = JSON.parse(savedTasks);
+      const tasksWithIcons = parsed.map((task: any) => ({
+        ...task,
+        icon: task.title.includes('Study') ? Book
+          : task.title.includes('Project') ? Briefcase
+          : task.title.includes('Football') ? Dumbbell
+          : Heart
+      }));
+      setTodaysFocus(tasksWithIcons);
+    }
+    
+    if (savedFocusTime) {
+      setFocusTime(savedFocusTime);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('todaysFocus', JSON.stringify(todaysFocus));
+  }, [todaysFocus]);
+
+  useEffect(() => {
+    localStorage.setItem('focusTime', focusTime);
+  }, [focusTime]);
+
+  const toggleTask = (index: number) => {
+    setTodaysFocus(prev => 
+      prev.map((task, i) => 
+        i === index ? { ...task, completed: !task.completed } : task
+      )
+    );
+  };
 
   const quotes = [
     "Focus is the gateway to thinking clearly.",
@@ -63,13 +112,28 @@ const Dashboard = () => {
             <p className="mt-4 text-muted-foreground text-center">
               {completedTasks} of {todaysFocus.length} tasks completed
             </p>
-            <Button
-              onClick={() => navigate('/timer')}
-              className="mt-6 w-full gradient-primary text-white hover:opacity-90 transition-smooth rounded-xl py-6 text-lg font-medium"
-            >
-              <Play className="w-5 h-5 mr-2" />
-              Focus Now
-            </Button>
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-foreground">Focus Time Duration</label>
+                <Select value={focusTime} onValueChange={setFocusTime}>
+                  <SelectTrigger className="w-full">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="25">25 minutes</SelectItem>
+                    <SelectItem value="45">45 minutes</SelectItem>
+                    <SelectItem value="60">60 minutes</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <Button
+                onClick={() => navigate('/timer', { state: { duration: parseInt(focusTime) } })}
+                className="w-full gradient-primary text-white hover:opacity-90 transition-smooth rounded-xl py-6 text-lg font-medium"
+              >
+                <Play className="w-5 h-5 mr-2" />
+                Focus Now ({focusTime} min)
+              </Button>
+            </div>
           </div>
         </motion.div>
 
@@ -100,13 +164,42 @@ const Dashboard = () => {
       >
         <h2 className="text-2xl font-semibold mb-4 text-foreground">Today's Focus</h2>
         <div className="grid gap-4 md:grid-cols-2">
-          {todaysFocus.map((task, index) => (
-            <FocusCard
-              key={task.title}
-              {...task}
-              delay={0.4 + index * 0.1}
-            />
-          ))}
+          {todaysFocus.map((task, index) => {
+            const Icon = task.icon;
+            return (
+              <motion.div
+                key={task.title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 + index * 0.1, duration: 0.5 }}
+                className={`glass-card rounded-2xl p-6 hover-scale cursor-pointer ${
+                  task.completed ? 'opacity-75' : ''
+                }`}
+              >
+                <div className="flex items-start gap-4">
+                  <Checkbox
+                    checked={task.completed}
+                    onCheckedChange={() => toggleTask(index)}
+                    className="mt-1"
+                  />
+                  <div
+                    className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+                    style={{ backgroundColor: `${task.color}20`, color: task.color }}
+                  >
+                    <Icon className="w-6 h-6" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className={`font-semibold text-foreground mb-1 ${
+                      task.completed ? 'line-through' : ''
+                    }`}>
+                      {task.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground">{task.duration}</p>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </motion.div>
 
@@ -132,6 +225,14 @@ const Dashboard = () => {
         >
           <span className="text-2xl">📊</span>
           <span className="text-sm font-medium">View Stats</span>
+        </Button>
+        <Button
+          variant="outline"
+          onClick={() => navigate('/dsa')}
+          className="glass-card border-border hover:bg-accent/10 transition-smooth rounded-xl py-8 flex flex-col gap-2"
+        >
+          <span className="text-2xl">💻</span>
+          <span className="text-sm font-medium">DSA Tracker</span>
         </Button>
         <Button
           variant="outline"

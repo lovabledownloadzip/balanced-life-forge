@@ -1,17 +1,21 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Play, Pause, RotateCcw, Volume2, VolumeX } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 
 const Timer = () => {
-  const [minutes, setMinutes] = useState(50);
+  const location = useLocation();
+  const initialDuration = location.state?.duration || 25;
+  
+  const [minutes, setMinutes] = useState(initialDuration);
   const [seconds, setSeconds] = useState(0);
   const [isActive, setIsActive] = useState(false);
   const [isBreak, setIsBreak] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(false);
 
-  const totalSeconds = isBreak ? 10 * 60 : 50 * 60;
+  const totalSeconds = isBreak ? 10 * 60 : initialDuration * 60;
   const currentSeconds = minutes * 60 + seconds;
   const progress = ((totalSeconds - currentSeconds) / totalSeconds) * 100;
 
@@ -43,7 +47,7 @@ const Timer = () => {
     if (isBreak) {
       toast.success('Break time is over! Ready to focus again? 🎯');
       setIsBreak(false);
-      setMinutes(50);
+      setMinutes(initialDuration);
       setSeconds(0);
     } else {
       toast.success('Great work! Time for a break! 🎉');
@@ -65,7 +69,7 @@ const Timer = () => {
     if (isBreak) {
       setMinutes(10);
     } else {
-      setMinutes(50);
+      setMinutes(initialDuration);
     }
     setSeconds(0);
     toast.info('Timer reset');
