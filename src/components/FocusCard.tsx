@@ -16,7 +16,7 @@ const FocusCard = ({ icon: Icon, title, duration, completed, color, delay = 0 }:
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay, duration: 0.5 }}
-      className="glass-card rounded-2xl p-4 transition-smooth hover:scale-105 hover:shadow-xl"
+      className="glass-card rounded-2xl p-4 transition-all duration-300 hover:scale-105 hover:shadow-xl"
     >
       <div className="flex items-center gap-3">
         <div

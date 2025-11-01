@@ -80,7 +80,7 @@ const Timer = () => {
   const strokeDashoffset = circumference - (progress / 100) * circumference;
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-6">
+    <div className="min-h-screen flex items-center justify-center p-6 bg-background transition-colors duration-300">
       <div className="max-w-2xl w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -207,16 +207,16 @@ const Timer = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="glass-card rounded-2xl p-6 overflow-hidden"
+              className="glass-card rounded-2xl p-6 overflow-hidden transition-colors duration-300"
             >
               <h3 className="font-semibold mb-4 text-foreground">Background Sounds</h3>
               <div className="grid grid-cols-3 gap-4">
                 {['Rain 🌧️', 'Coffee Shop ☕', 'Forest 🌲'].map((sound) => (
                   <Button
                     key={sound}
-                    variant="outline"
-                    className="glass-card border-border hover:bg-accent/10 transition-smooth rounded-xl py-6"
-                  >
+                  variant="outline"
+                  className="glass-card border-border hover:bg-accent/10 transition-all duration-300 rounded-xl py-6"
+                >
                     {sound}
                   </Button>
                 ))}

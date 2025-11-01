@@ -38,7 +38,7 @@ const Wellness = () => {
   };
 
   return (
-    <div className="min-h-screen p-6 md:p-8 max-w-4xl mx-auto">
+    <div className="min-h-screen p-6 md:p-8 max-w-4xl mx-auto bg-background transition-colors duration-300">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -164,7 +164,7 @@ const Wellness = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.6, duration: 0.5 }}
-        className="glass-card rounded-3xl p-6 mt-6 gradient-soft"
+        className="glass-card rounded-3xl p-6 mt-6 gradient-soft transition-colors duration-300"
       >
         <h3 className="text-lg font-semibold text-foreground mb-3">💡 Wellness Tips</h3>
         <ul className="space-y-2 text-sm text-muted-foreground">

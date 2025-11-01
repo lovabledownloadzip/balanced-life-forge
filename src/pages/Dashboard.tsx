@@ -76,7 +76,7 @@ const Dashboard = () => {
   const progress = (completedTasks / todaysFocus.length) * 100;
 
   return (
-    <div className="min-h-screen p-6 md:p-8 max-w-6xl mx-auto">
+    <div className="min-h-screen p-6 md:p-8 max-w-6xl mx-auto bg-background transition-colors duration-300">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -104,7 +104,7 @@ const Dashboard = () => {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.1, duration: 0.5 }}
-          className="glass-card rounded-3xl p-6 md:p-8"
+          className={`glass-card rounded-3xl p-6 md:p-8 transition-colors duration-300`}
         >
           <h2 className="text-xl font-semibold mb-6 text-foreground">Today's Progress</h2>
           <div className="flex flex-col items-center">
@@ -142,7 +142,7 @@ const Dashboard = () => {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2, duration: 0.5 }}
-          className="glass-card rounded-3xl p-6 md:p-8 gradient-primary relative overflow-hidden"
+          className="glass-card rounded-3xl p-6 md:p-8 gradient-primary relative overflow-hidden transition-colors duration-300"
         >
           <div className="relative z-10">
             <div className="text-6xl mb-4 opacity-20">"</div>
@@ -172,7 +172,7 @@ const Dashboard = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 + index * 0.1, duration: 0.5 }}
-                className={`glass-card rounded-2xl p-6 hover-scale cursor-pointer ${
+                className={`glass-card rounded-2xl p-6 hover-scale cursor-pointer transition-all duration-300 ${
                   task.completed ? 'opacity-75' : ''
                 }`}
               >
@@ -213,7 +213,7 @@ const Dashboard = () => {
         <Button
           variant="outline"
           onClick={() => navigate('/planner')}
-          className="glass-card border-border hover:bg-accent/10 transition-smooth rounded-xl py-8 flex flex-col gap-2"
+          className="glass-card border-border hover:bg-accent/10 transition-all duration-300 rounded-xl py-8 flex flex-col gap-2"
         >
           <span className="text-2xl">📅</span>
           <span className="text-sm font-medium">Plan Day</span>
@@ -221,7 +221,7 @@ const Dashboard = () => {
         <Button
           variant="outline"
           onClick={() => navigate('/progress')}
-          className="glass-card border-border hover:bg-accent/10 transition-smooth rounded-xl py-8 flex flex-col gap-2"
+          className="glass-card border-border hover:bg-accent/10 transition-all duration-300 rounded-xl py-8 flex flex-col gap-2"
         >
           <span className="text-2xl">📊</span>
           <span className="text-sm font-medium">View Stats</span>
@@ -229,7 +229,7 @@ const Dashboard = () => {
         <Button
           variant="outline"
           onClick={() => navigate('/dsa')}
-          className="glass-card border-border hover:bg-accent/10 transition-smooth rounded-xl py-8 flex flex-col gap-2"
+          className="glass-card border-border hover:bg-accent/10 transition-all duration-300 rounded-xl py-8 flex flex-col gap-2"
         >
           <span className="text-2xl">💻</span>
           <span className="text-sm font-medium">DSA Tracker</span>
@@ -237,7 +237,7 @@ const Dashboard = () => {
         <Button
           variant="outline"
           onClick={() => navigate('/wellness')}
-          className="glass-card border-border hover:bg-accent/10 transition-smooth rounded-xl py-8 flex flex-col gap-2"
+          className="glass-card border-border hover:bg-accent/10 transition-all duration-300 rounded-xl py-8 flex flex-col gap-2"
         >
           <span className="text-2xl">👁️</span>
           <span className="text-sm font-medium">Wellness</span>
@@ -245,7 +245,7 @@ const Dashboard = () => {
         <Button
           variant="outline"
           onClick={() => navigate('/timer')}
-          className="glass-card border-border hover:bg-accent/10 transition-smooth rounded-xl py-8 flex flex-col gap-2"
+          className="glass-card border-border hover:bg-accent/10 transition-all duration-300 rounded-xl py-8 flex flex-col gap-2"
         >
           <span className="text-2xl">🎯</span>
           <span className="text-sm font-medium">Zen Mode</span>

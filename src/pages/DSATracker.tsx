@@ -139,7 +139,7 @@ const DSATracker = () => {
   const totalProblems = topics.reduce((sum, topic) => sum + topic.total, 0);
 
   return (
-    <div className="min-h-screen p-4 md:p-8 space-y-6">
+    <div className="min-h-screen p-4 md:p-8 space-y-6 bg-background transition-colors duration-300">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -163,7 +163,7 @@ const DSATracker = () => {
           </div>
 
           {/* Daily Goal Section */}
-          <Card className="glass-card border-primary/20">
+          <Card className="glass-card border-primary/20 transition-colors duration-300">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Target className="w-5 h-5 text-primary" />
@@ -218,7 +218,7 @@ const DSATracker = () => {
 
           {/* Analytics */}
           <div className="grid md:grid-cols-2 gap-6">
-            <Card className="glass-card">
+            <Card className="glass-card transition-colors duration-300">
               <CardHeader>
                 <CardTitle>Topic Progress</CardTitle>
                 <CardDescription>Completion percentage by topic</CardDescription>
@@ -242,7 +242,7 @@ const DSATracker = () => {
               </CardContent>
             </Card>
 
-            <Card className="glass-card">
+            <Card className="glass-card transition-colors duration-300">
               <CardHeader>
                 <CardTitle>Daily Performance</CardTitle>
                 <CardDescription>Last 7 days activity</CardDescription>

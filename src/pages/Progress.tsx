@@ -123,7 +123,7 @@ const Progress = () => {
   };
 
   return (
-    <div className="min-h-screen p-6 md:p-8 max-w-6xl mx-auto">
+    <div className="min-h-screen p-6 md:p-8 max-w-6xl mx-auto bg-background transition-colors duration-300">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -148,7 +148,7 @@ const Progress = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
-              className="glass-card rounded-2xl p-6"
+              className="glass-card rounded-2xl p-6 transition-colors duration-300"
             >
               <Icon className="w-8 h-8 text-primary mb-3" />
               <div className="text-2xl md:text-3xl font-bold text-foreground mb-1">
@@ -168,9 +168,9 @@ const Progress = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.5 }}
-          className="glass-card rounded-3xl p-6"
-        >
-          <h2 className="text-xl font-semibold text-foreground mb-6">Weekly Activity</h2>
+            className="glass-card rounded-3xl p-6 transition-colors duration-300"
+          >
+            <h2 className="text-xl font-semibold text-foreground mb-6">Weekly Activity</h2>
           <ResponsiveContainer width="100%" height={250}>
             <BarChart data={weekData}>
               <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
@@ -195,9 +195,9 @@ const Progress = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.5 }}
-          className="glass-card rounded-3xl p-6"
-        >
-          <h2 className="text-xl font-semibold text-foreground mb-6">Performance Overview</h2>
+            className="glass-card rounded-3xl p-6 transition-colors duration-300"
+          >
+            <h2 className="text-xl font-semibold text-foreground mb-6">Performance Overview</h2>
           <ResponsiveContainer width="100%" height={250}>
             <RadarChart data={radarData}>
               <PolarGrid stroke="hsl(var(--border))" />
@@ -300,7 +300,7 @@ const Progress = () => {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
-              className="glass-card rounded-2xl p-6"
+              className="glass-card rounded-2xl p-6 transition-colors duration-300"
             >
               <div className="flex items-center gap-4">
                 <div className="text-3xl">{tracker.emoji}</div>
@@ -347,7 +347,7 @@ const Progress = () => {
             </motion.div>
           ))}
           {customTrackers.length === 0 && (
-            <div className="glass-card rounded-2xl p-8 text-center">
+            <div className="glass-card rounded-2xl p-8 text-center transition-colors duration-300">
               <p className="text-muted-foreground">No custom trackers yet. Create one to track your goals!</p>
             </div>
           )}
@@ -368,7 +368,7 @@ const Progress = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.8 + index * 0.1, duration: 0.5 }}
-              className="glass-card rounded-2xl p-6 hover:scale-105 transition-smooth"
+              className="glass-card rounded-2xl p-6 hover:scale-105 transition-all duration-300"
             >
               <div className="flex items-center gap-4">
                 <div className="text-4xl">{badge.icon}</div>

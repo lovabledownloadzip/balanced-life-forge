@@ -23,14 +23,14 @@ const Layout = ({ children }: LayoutProps) => {
   ];
 
   return (
-    <div className="min-h-screen gradient-soft">
+    <div className="min-h-screen bg-background transition-colors duration-300">
       {/* Theme Toggle - Fixed Top Right */}
       <div className="fixed top-4 right-4 z-50">
         <Button
           variant="outline"
           size="icon"
           onClick={toggleTheme}
-          className="glass-card rounded-full w-12 h-12 border-border hover:bg-accent/10 transition-smooth"
+          className="glass-card rounded-full w-12 h-12 border-border hover:bg-accent/10 transition-all duration-300"
         >
           <motion.div
             initial={{ scale: 0.5, rotate: -90 }}
@@ -51,7 +51,7 @@ const Layout = ({ children }: LayoutProps) => {
       <main className="pb-20 md:pb-6">{children}</main>
 
       {/* Bottom Navigation - Mobile */}
-      <nav className="fixed bottom-0 left-0 right-0 md:hidden glass-card border-t z-50">
+      <nav className="fixed bottom-0 left-0 right-0 md:hidden glass-card border-t border-border z-50">
         <div className="flex justify-around items-center h-16 px-4">
           {navItems.map((item) => {
             const Icon = item.icon;
@@ -89,7 +89,7 @@ const Layout = ({ children }: LayoutProps) => {
       </nav>
 
       {/* Side Navigation - Desktop */}
-      <nav className="hidden md:block fixed top-0 left-0 h-screen w-20 glass-card border-r z-50">
+      <nav className="hidden md:block fixed top-0 left-0 h-screen w-20 glass-card border-r border-border z-50">
         <div className="flex flex-col items-center py-8 space-y-8">
           <div className="w-10 h-10 rounded-xl gradient-primary flex items-center justify-center text-white font-bold text-lg">
             FF

@@ -159,7 +159,7 @@ const Planner = () => {
   const isToday = currentDate.toDateString() === today.toDateString();
 
   return (
-    <div className="min-h-screen p-6 md:p-8 max-w-6xl mx-auto">
+    <div className="min-h-screen p-6 md:p-8 max-w-6xl mx-auto bg-background transition-colors duration-300">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -179,7 +179,7 @@ const Planner = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1, duration: 0.5 }}
-        className="glass-card rounded-3xl p-6 mb-6"
+        className="glass-card rounded-3xl p-6 mb-6 transition-colors duration-300"
       >
         <div className="flex items-center justify-between mb-4">
           <Button
@@ -380,8 +380,8 @@ const Planner = () => {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.3 + index * 0.1, duration: 0.5 }}
-                  className="glass-card rounded-2xl p-4 hover:scale-[1.02] transition-smooth"
-                >
+                className="glass-card rounded-2xl p-4 hover:scale-[1.02] transition-all duration-300"
+              >
                   <div className="flex items-center gap-4">
                     <div className="text-lg font-semibold text-muted-foreground w-16">
                       {block.time}
@@ -445,7 +445,7 @@ const Planner = () => {
               <Button
                 variant="outline"
                 onClick={() => addTemplate(template.label)}
-                className="glass-card border-border hover:bg-accent/10 transition-smooth rounded-xl w-full py-8 flex flex-col gap-2"
+                className="glass-card border-border hover:bg-accent/10 transition-all duration-300 rounded-xl w-full py-8 flex flex-col gap-2"
               >
                 <span className="text-3xl">{template.icon}</span>
                 <span className="text-sm font-medium">{template.label}</span>
