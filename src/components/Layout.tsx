@@ -1,7 +1,9 @@
 import { ReactNode } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, Timer, Calendar, TrendingUp, Eye, Code2 } from 'lucide-react';
+import { Home, Timer, Calendar, TrendingUp, Eye, Code2, Moon, Sun } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useTheme } from '@/hooks/use-theme';
+import { Button } from '@/components/ui/button';
 
 interface LayoutProps {
   children: ReactNode;
@@ -9,6 +11,7 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   const location = useLocation();
+  const { theme, toggleTheme } = useTheme();
 
   const navItems = [
     { path: '/', icon: Home, label: 'Home' },
@@ -21,6 +24,29 @@ const Layout = ({ children }: LayoutProps) => {
 
   return (
     <div className="min-h-screen gradient-soft">
+      {/* Theme Toggle - Fixed Top Right */}
+      <div className="fixed top-4 right-4 z-50">
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={toggleTheme}
+          className="glass-card rounded-full w-12 h-12 border-border hover:bg-accent/10 transition-smooth"
+        >
+          <motion.div
+            initial={{ scale: 0.5, rotate: -90 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{ duration: 0.3 }}
+            key={theme}
+          >
+            {theme === 'light' ? (
+              <Moon className="w-5 h-5 text-primary" />
+            ) : (
+              <Sun className="w-5 h-5 text-accent" />
+            )}
+          </motion.div>
+        </Button>
+      </div>
+
       {/* Main Content */}
       <main className="pb-20 md:pb-6">{children}</main>
 
